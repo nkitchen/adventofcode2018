@@ -1,58 +1,50 @@
 #!/usr/bin/env python3
 
 import fileinput
+import pyllist
 
 s = next(fileinput.input()).strip()
 
 def reacting(c, d):
     return c.lower() == d.lower() and c.islower() != d.islower()
 
-destroyed = []
+# Ranges of indices where units have been destroyed
+destroyed = pyllist.dllist()
 
 i = 0
 while i < len(s) - 1:
     if reacting(s[i], s[i + 1]):
-        destroyed.append(range(i, i + 2))
+        n = destroyed.last
+        if n and n.value.stop == i:
+            r = n.value
+            destroyed.pop()
+            destroyed.append(range(r.start, i + 2))
+        else:
+            destroyed.append(range(i, i + 2))
+
         i += 2
     else:
         i += 1
 
-# Postcondition: a is a list of non-adjacent ranges.
-def mergeRanges(a):
-    i = 0
-    while i < len(a) - 1:
-        if a[i].stop == a[i + 1].start:
-            a[i] = range(a[i].start, a[i + 1].stop)
-            a.pop(i + 1)
+n = destroyed.first
+while n:
+    r = n.value
+    while 0 < r.start and r.stop < len(s):
+        # Invariant: r has no adjacent range in destroyed.
+        if reacting(s[r.start - 1], s[r.stop]):
+            r = range(r.start - 1, r.stop + 1)
+            if n.prev and n.prev.value.stop == r.start:
+                # Merge with previous
+                r = range(n.prev.value.start, r.stop)
+                destroyed.remove(n.prev)
+            if n.next and n.next.value.start == r.stop:
+                # Merge with next
+                r = range(r.start, n.next.value.stop)
+                destroyed.remove(n.next)
+            n.value = r
         else:
-            i += 1
+            break
 
-# Precondition: destroyed is a list of non-adjacent ranges
-def growGaps():
-    def _grow(j):
-        grew = False
-        r = destroyed[j]
-        while True:
-            if r.start == 0:
-                return grew
-            if r.stop == len(s):
-                return grew
-            if j > 0 and r.start == destroyed[j - 1].stop:
-                return grew
-            if j < len(destroyed) - 1 and r.stop == destroyed[j + 1].start:
-                return grew
-            if reacting(s[r.start - 1], s[r.stop]):
-                r = range(r.start - 1, r.stop + 1)
-                destroyed[j] = r
-                grew = True
-            else:
-                return grew
-
-    return any(_grow(i) for i in range(len(destroyed)))
-
-mergeRanges(destroyed)
-while growGaps():
-    mergeRanges(destroyed)
+    n = n.next
 
 print(len(s) - sum(len(r) for r in destroyed))
-    
