@@ -1,0 +1,179 @@
+#ip 2
+ 0: > addr [2] #16 2
+ 1:   seti #1 _ 1
+ 2:   seti #1 _ 3
+ 3:   mulr [1] [3] 5
+ 4:   eqrr [5] [4] 5
+ 5: > addr [5] [2] 2
+ 6: > addr [2] #1 2
+ 7:   addr [1] [0] 0
+ 8:   addr [3] #1 3
+ 9:   gtrr [3] [4] 5
+10: > addr [2] [5] 2
+11: > seti #2 _ 2
+12:   addr [1] #1 1
+13:   gtrr [1] [4] 5
+14: > addr [5] [2] 2
+15: > seti #1 _ 2
+16: > mulr [2] [2] 2
+17:   addr [4] #2 4
+18:   mulr [4] [4] 4
+19:   mulr [2] [4] 4
+20:   mulr [4] #11 4
+21:   addr [5] #1 5
+22:   mulr [5] [2] 5
+23:   addr [5] #17 5
+24:   addr [4] [5] 4
+25: > addr [2] [0] 2
+26: > seti #0 _ 2
+27:   setr [2] _ 5
+28:   mulr [5] [2] 5
+29:   addr [2] [5] 5
+30:   mulr [2] [5] 5
+31:   mulr [5] #14 5
+32:   mulr [5] [2] 5
+33:   addr [4] [5] 4
+34:   seti #0 _ 0
+35: > seti #0 _ 2
+
+ 0: addi w = w + 16
+ 1: seti v = 1
+ 2: seti x = 1
+ 3: mulr z = v * x
+ 4: eqrr z = z == y
+ 5: addr w = z + w
+ 6: addi w = w + 1
+ 7: addr u = v + u
+ 8: addi x = x + 1
+ 9: gtrr z = x > y
+10: addr w = w + z
+11: seti w = 2
+12: addi v = v + 1
+13: gtrr z = v > y
+14: addr w = z + w
+15: seti w = 1
+16: mulr w = w * w
+17: addi y = y + 2
+18: mulr y = y * y
+19: mulr y = w * y
+20: muli y = y * 11
+21: addi z = z + 1
+22: mulr z = z * w
+23: addi z = z + 17
+24: addr y = y + z
+25: addr w = w + u
+26: seti w = 0
+27: setr z = w
+28: mulr z = z * w
+29: addr z = w + z
+30: mulr z = w * z
+31: muli z = z * 14
+32: mulr z = z * w
+33: addr y = y + z
+34: seti u = 0
+35: seti w = 0
+
+
+ 0: addi w = w + 16    0 {addi 2 16 2} [1 0 16 0 0 0]
+17: addi y = y + 2     17 {addi 4 2 4} [1 0 17 0 2 0]
+18: mulr y = y * y     18 {mulr 4 4 4} [1 0 18 0 4 0]
+19: mulr y = (19) * y  19 {mulr 2 4 4} [1 0 19 0 76 0]
+20: muli y = y * 11    20 {muli 4 11 4} [1 0 20 0 836 0]
+21: addi z = z + 1     21 {addi 5 1 5} [1 0 21 0 836 1]
+22: mulr z = z * w     22 {mulr 5 2 5} [1 0 22 0 836 22]
+23: addi z = z + 17    23 {addi 5 17 5} [1 0 23 0 836 39]
+24: addr y = y + z     24 {addr 4 5 4} [1 0 24 0 875 39]
+25: addr w = w + u     25 {addr 2 0 2} [1 0 26 0 875 39]
+27: setr z = w         27 {setr 2 3 5} [1 0 27 0 875 27]
+28: mulr z = z * w     28 {mulr 5 2 5} [1 0 28 0 875 756]
+29: addr z = w + z     29 {addr 2 5 5} [1 0 29 0 875 785]
+30: mulr z = w * z     30 {mulr 2 5 5} [1 0 30 0 875 23550]
+31: muli z = z * 14    31 {muli 5 14 5} [1 0 31 0 875 329700]
+32: mulr z = z * w     32 {mulr 5 2 5} [1 0 32 0 875 10550400]
+33: addr y = y + z     33 {addr 4 5 4} [1 0 33 0 10551275 10550400]
+34: seti u = 0         34 {seti 0 9 0} [0 0 34 0 10551275 10550400]
+35: seti w = 0         35 {seti 0 6 2} [0 0 0 0 10551275 10550400]
+ 1: seti v = 1          1 {seti 1 1 1} [0 1 1 0 10551275 10550400]
+ 2: seti x = 1          2 {seti 1 4 3} [0 1 2 1 10551275 10550400]
+ 3: mulr z = v * x      3 {mulr 1 3 5} [0 1 3 1 10551275 1]
+ 4: eqrr z = z == y     4 {eqrr 5 4 5} [0 1 4 1 10551275 0]
+ 5: addr w = z + w      5 {addr 5 2 2} [0 1 5 1 10551275 0]
+ 6: addi w = w + 1      6 {addi 2 1 2} [0 1 7 1 10551275 0]
+ 8: addi x = x + 1      8 {addi 3 1 3} [0 1 8 2 10551275 0]
+ 9: gtrr z = x > y      9 {gtrr 3 4 5} [0 1 9 2 10551275 0]
+10: addr w = w + z     10 {addr 2 5 2} [0 1 10 2 10551275 0]
+11: seti w = 2         11 {seti 2 4 2} [0 1 2 2 10551275 0]
+ 3: mulr z = v * x      3 {mulr 1 3 5} [0 1 3 2 10551275 2]
+ 4: eqrr z = z == y     4 {eqrr 5 4 5} [0 1 4 2 10551275 0]
+ 5: addr w = z + w      5 {addr 5 2 2} [0 1 5 2 10551275 0]
+ 6: addi w = w + 1      6 {addi 2 1 2} [0 1 7 2 10551275 0]
+ 8: addi x = x + 1      8 {addi 3 1 3} [0 1 8 3 10551275 0]
+ 9: gtrr z = x > y      9 {gtrr 3 4 5} [0 1 9 3 10551275 0]
+10: addr w = w + z     10 {addr 2 5 2} [0 1 10 3 10551275 0]
+11: seti w = 2         11 {seti 2 4 2} [0 1 2 3 10551275 0]
+                        3 {mulr 1 3 5} [0 1 3 3 10551275 3]
+                        4 {eqrr 5 4 5} [0 1 4 3 10551275 0]
+                        5 {addr 5 2 2} [0 1 5 3 10551275 0]
+                        6 {addi 2 1 2} [0 1 7 3 10551275 0]
+                        8 {addi 3 1 3} [0 1 8 4 10551275 0]
+                        9 {gtrr 3 4 5} [0 1 9 4 10551275 0]
+                       10 {addr 2 5 2} [0 1 10 4 10551275 0]
+                       11 {seti 2 4 2} [0 1 2 4 10551275 0]
+
+
+ 1: seti v = 1
+ 2: seti x = 1
+ 3: mulr z = v * x
+ 4: eqrr z = z == y
+ 5: addr w = z + w
+ 6: addi w = w + 1
+ 7: addr u = v + u
+ 8: addi x = x + 1
+ 9: gtrr z = x > y
+10: addr w = w + z
+11: seti w = 2
+12: addi v = v + 1
+13: gtrr z = v > y
+14: addr w = z + w
+15: seti w = 1
+16: mulr w = w * w
+17: addi y = y + 2
+18: mulr y = y * y
+19: mulr y = w * y
+20: muli y = y * 11
+21: addi z = z + 1
+22: mulr z = z * w
+23: addi z = z + 17
+24: addr y = y + z
+25: addr w = w + u
+26: seti w = 0
+27: setr z = w
+28: mulr z = z * w
+29: addr z = w + z
+30: mulr z = w * z
+31: muli z = z * 14
+32: mulr z = z * w
+33: addr y = y + z
+34: seti u = 0
+35: seti w = 0
+
+8 {addr 1 0 0} [1 1 7 10551275 10551275 1]
+8 {addr 1 0 0} [6 5 7 2110255 10551275 1]
+8 {addr 1 0 0} [13 7 7 1507325 10551275 1]
+8 {addr 1 0 0} [38 25 7 422051 10551275 1]
+8 {addr 1 0 0} [73 35 7 301465 10551275 1]
+               [73 175 7 60293 10551275 1]
+8 {addr 1 0 0} [248 175 7 60293 10551275 1]
+
+1        5 * 5 * 7 * 60293
+5        5 *     7 * 60293
+7        5 * 5     * 60293
+25               7 * 60293
+35       5 *         60293
+175                  60293
+60293    5 * 5 * 7
+301465   5 *     7
+301465 
+         5 * 5
+                 7
+         5
