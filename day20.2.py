@@ -177,6 +177,6 @@ def bfs():
     return dist
 
 dist = bfs()
-print(max(dist.values()))
+print(sum(1 for d in dist.values() if d >= 1000))
 
 # vim: set shiftwidth=4 :
